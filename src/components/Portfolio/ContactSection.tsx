@@ -1,11 +1,68 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { useState } from 'react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
-import { Github, Linkedin, Mail, MessageSquare, ExternalLink, Phone } from 'lucide-react';
+import { Github, Linkedin, Mail, MessageSquare, ExternalLink, Phone, Send, CheckCircle } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 
 const ContactSection = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const { toast } = useToast();
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData(prev => ({
+      ...prev,
+      [e.target.name]: e.target.value
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      // Create a mailto link with form data
+      const subject = encodeURIComponent(formData.subject || 'Portfolio Contact Form');
+      const body = encodeURIComponent(
+        `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+      );
+      const mailtoLink = `mailto:myselfliril@gmail.com?subject=${subject}&body=${body}`;
+      
+      // Open email client
+      window.location.href = mailtoLink;
+      
+      setIsSubmitted(true);
+      toast({
+        title: "Email client opened!",
+        description: "Your default email client should open with the message pre-filled.",
+      });
+      
+      // Reset form after a delay
+      setTimeout(() => {
+        setFormData({ name: '', email: '', subject: '', message: '' });
+        setIsSubmitted(false);
+      }, 3000);
+      
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Something went wrong. Please try contacting directly at myselfliril@gmail.com",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   const contactInfo = [
     {
       icon: Mail,
@@ -68,59 +125,95 @@ const ContactSection = () => {
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Contact Form */}
           <div className="lg:col-span-2">
-            <Card className="bg-card-gradient border-border">
+            <Card className="bg-card-gradient border-border hover:shadow-glow-primary/20 transition-all duration-500">
               <CardHeader>
                 <CardTitle className="text-2xl text-card-foreground flex items-center space-x-3">
                   <Mail className="h-6 w-6 text-primary" />
                   <span>Send me a message</span>
                 </CardTitle>
+                <CardDescription>
+                  Fill out the form below and I'll get back to you within 24 hours
+                </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-4">
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="name">Name *</Label>
+                      <Input 
+                        id="name"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleInputChange}
+                        placeholder="Your name"
+                        className="bg-background border-border focus:border-primary transition-colors"
+                        required
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="email">Email *</Label>
+                      <Input 
+                        id="email"
+                        name="email"
+                        type="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        placeholder="your.email@example.com"
+                        className="bg-background border-border focus:border-primary transition-colors"
+                        required
+                      />
+                    </div>
+                  </div>
+                  
                   <div className="space-y-2">
-                    <Label htmlFor="name">Name</Label>
+                    <Label htmlFor="subject">Subject</Label>
                     <Input 
-                      id="name" 
-                      placeholder="Your name"
+                      id="subject"
+                      name="subject"
+                      value={formData.subject}
+                      onChange={handleInputChange}
+                      placeholder="What's this about?"
                       className="bg-background border-border focus:border-primary transition-colors"
                     />
                   </div>
+                  
                   <div className="space-y-2">
-                    <Label htmlFor="email">Email</Label>
-                    <Input 
-                      id="email" 
-                      type="email"
-                      placeholder="your.email@example.com"
-                      className="bg-background border-border focus:border-primary transition-colors"
+                    <Label htmlFor="message">Message *</Label>
+                    <Textarea 
+                      id="message"
+                      name="message"
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      placeholder="Tell me about your project or just say hello!"
+                      className="bg-background border-border focus:border-primary transition-colors min-h-[120px]"
+                      required
                     />
                   </div>
-                </div>
-                
-                <div className="space-y-2">
-                  <Label htmlFor="subject">Subject</Label>
-                  <Input 
-                    id="subject" 
-                    placeholder="What's this about?"
-                    className="bg-background border-border focus:border-primary transition-colors"
-                  />
-                </div>
-                
-                <div className="space-y-2">
-                  <Label htmlFor="message">Message</Label>
-                  <Textarea 
-                    id="message" 
-                    placeholder="Tell me about your project or just say hello!"
-                    className="bg-background border-border focus:border-primary transition-colors min-h-[120px]"
-                  />
-                </div>
-                
-                <Button 
-                  size="lg" 
-                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-glow-primary hover:shadow-glow-primary/50 transition-all duration-300"
-                >
-                  <Mail className="mr-2 h-5 w-5" />
-                  Send Message
-                </Button>
+                  
+                  <Button 
+                    type="submit"
+                    size="lg" 
+                    disabled={isSubmitting || isSubmitted}
+                    className="w-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-glow-primary hover:shadow-glow-primary/50 transition-all duration-300 disabled:opacity-50"
+                  >
+                    {isSubmitted ? (
+                      <>
+                        <CheckCircle className="mr-2 h-5 w-5" />
+                        Message Prepared!
+                      </>
+                    ) : isSubmitting ? (
+                      <>
+                        <div className="animate-spin mr-2 h-5 w-5 border-2 border-white border-t-transparent rounded-full"></div>
+                        Processing...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="mr-2 h-5 w-5" />
+                        Send Message
+                      </>
+                    )}
+                  </Button>
+                </form>
               </CardContent>
             </Card>
           </div>
@@ -128,7 +221,7 @@ const ContactSection = () => {
           {/* Contact Info & Links */}
           <div className="space-y-6">
             {/* Direct Contact */}
-            <Card className="bg-card-gradient border-border">
+            <Card className="bg-card-gradient border-border hover:shadow-glow-accent/20 transition-all duration-500">
               <CardHeader>
                 <CardTitle className="text-xl text-card-foreground">Get in Touch</CardTitle>
               </CardHeader>
@@ -159,7 +252,7 @@ const ContactSection = () => {
             </Card>
 
             {/* Coding Profiles */}
-            <Card className="bg-card-gradient border-border">
+            <Card className="bg-card-gradient border-border hover:shadow-glow-primary/20 transition-all duration-500">
               <CardHeader>
                 <CardTitle className="text-xl text-card-foreground">Coding Profiles</CardTitle>
               </CardHeader>
@@ -189,7 +282,7 @@ const ContactSection = () => {
             </Card>
 
             {/* Quick Connect */}
-            <Card className="bg-card-gradient border-border">
+            <Card className="bg-card-gradient border-border hover:shadow-glow-accent/20 transition-all duration-500">
               <CardContent className="p-6 text-center">
                 <div className="mb-4">
                   <h3 className="font-semibold text-card-foreground mb-2">Quick Connect</h3>
@@ -197,16 +290,28 @@ const ContactSection = () => {
                     Prefer a direct approach? Let's skip the form!
                   </p>
                 </div>
-                <Button 
-                  variant="outline" 
-                  className="w-full border-accent text-accent hover:bg-accent hover:text-accent-foreground transition-all duration-300"
-                  asChild
-                >
-                  <a href="https://wa.me/918800857706" target="_blank" rel="noopener noreferrer">
-                    <MessageSquare className="mr-2 h-4 w-4" />
-                    WhatsApp Me
-                  </a>
-                </Button>
+                <div className="space-y-3">
+                  <Button 
+                    variant="outline" 
+                    className="w-full border-accent text-accent hover:bg-accent hover:text-accent-foreground transition-all duration-300"
+                    asChild
+                  >
+                    <a href="https://wa.me/918800857706" target="_blank" rel="noopener noreferrer">
+                      <MessageSquare className="mr-2 h-4 w-4" />
+                      WhatsApp Me
+                    </a>
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    className="w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+                    asChild
+                  >
+                    <a href="mailto:myselfliril@gmail.com" target="_blank" rel="noopener noreferrer">
+                      <Mail className="mr-2 h-4 w-4" />
+                      Email Directly
+                    </a>
+                  </Button>
+                </div>
               </CardContent>
             </Card>
           </div>

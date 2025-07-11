@@ -4,10 +4,12 @@ import AboutSection from '@/components/Portfolio/AboutSection';
 import ProjectsSection from '@/components/Portfolio/ProjectsSection';
 import ExperienceSection from '@/components/Portfolio/ExperienceSection';
 import ContactSection from '@/components/Portfolio/ContactSection';
+import FloatingParticles from '@/components/Portfolio/FloatingParticles';
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+    <div className="min-h-screen bg-background text-foreground overflow-x-hidden relative">
+      <FloatingParticles />
       <Navigation />
       
       <main>
