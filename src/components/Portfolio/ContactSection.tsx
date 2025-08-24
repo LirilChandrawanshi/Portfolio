@@ -17,6 +17,8 @@ const ContactSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { toast } = useToast();
+  const waPhone = '918800857706';
+  const waMessageDefault = encodeURIComponent("Hi Liril, I found your portfolio and would like to connect.");
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData(prev => ({
@@ -89,7 +91,7 @@ const ContactSection = () => {
       icon: MessageSquare,
       label: "WhatsApp",
       value: "+91 8800857706",
-      href: "https://wa.me/918800857706",
+      href: `https://api.whatsapp.com/send?phone=${waPhone}&text=${waMessageDefault}`,
       color: "accent"
     }
   ];
@@ -296,7 +298,7 @@ const ContactSection = () => {
                     className="w-full border-accent text-accent hover:bg-accent hover:text-accent-foreground transition-all duration-300"
                     asChild
                   >
-                    <a href="https://wa.me/918800857706" target="_blank" rel="noopener noreferrer">
+                    <a href={`https://api.whatsapp.com/send?phone=${waPhone}&text=${waMessageDefault}`} target="_blank" rel="noopener noreferrer">
                       <MessageSquare className="mr-2 h-4 w-4" />
                       WhatsApp Me
                     </a>
