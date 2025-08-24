@@ -88,7 +88,7 @@ const AboutSection = () => {
               <div className="relative group flex-shrink-0">
                 <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500 animate-pulse"></div>
                 <img 
-                  src="/lovable-uploads/26a4bc58-cf95-4113-977b-ab2f1dc1898e.png"
+                  src="/assets/images/profile.png"
                   alt="Liril Chandrawanshi - Professional Photo"
                   className="relative w-48 h-48 md:w-56 md:h-56 rounded-2xl object-cover border-2 border-primary/20 shadow-glow-primary/30 group-hover:scale-105 transition-all duration-500"
                 />

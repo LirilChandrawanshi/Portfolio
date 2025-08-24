@@ -47,7 +47,7 @@ const HeroSection = () => {
               <div className="absolute inset-0 bg-primary/20 rounded-full blur-2xl group-hover:blur-3xl transition-all duration-500 animate-pulse"></div>
               <div className="relative">
                 <img 
-                  src="/lovable-uploads/26a4bc58-cf95-4113-977b-ab2f1dc1898e.png"
+                  src="/assets/images/profile.png"
                   alt="Liril Chandrawanshi - Backend Developer"
                   className="w-48 h-48 lg:w-64 lg:h-64 rounded-full object-cover border-4 border-primary/30 shadow-glow-primary group-hover:scale-105 transition-all duration-500"
                 />
