@@ -97,9 +97,16 @@ const HeroSection = () => {
                   variant="outline" 
                   size="lg"
                   className="border-accent text-accent hover:bg-accent hover:text-accent-foreground transition-all duration-300 group"
+                  asChild
                 >
-                  <Download className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
-                  Download Resume
+                  <a 
+                    href="https://drive.google.com/file/d/13nYFQ5PVuZchJMYaHN3M7ocS5ooWDVUf/view?usp=drivesdk" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                  >
+                    <Download className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
+                    Download Resume
+                  </a>
                 </Button>
               </div>
               
