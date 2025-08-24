@@ -5,10 +5,12 @@ import ProjectsSection from '@/components/Portfolio/ProjectsSection';
 import ExperienceSection from '@/components/Portfolio/ExperienceSection';
 import ContactSection from '@/components/Portfolio/ContactSection';
 import FloatingParticles from '@/components/Portfolio/FloatingParticles';
+import CursorTracker from '@/components/Portfolio/CursorTracker';
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden relative">
+    <div className="min-h-screen bg-background text-foreground overflow-x-hidden relative cursor-none">
+      <CursorTracker />
       <FloatingParticles />
       <Navigation />
       

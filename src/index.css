@@ -48,6 +48,9 @@ All colors MUST be HSL.
     --glow-accent: 0 20px 60px hsl(var(--accent) / 0.3);
     --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    
+    /* Interactive elements */
+    --interactive-glow: 0 0 20px hsl(var(--primary) / 0.3);
 
     --sidebar-background: 0 0% 98%;
 

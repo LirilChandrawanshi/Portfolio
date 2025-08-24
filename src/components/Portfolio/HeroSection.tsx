@@ -49,7 +49,7 @@ const HeroSection = () => {
                 <img 
                   src="/lovable-uploads/26a4bc58-cf95-4113-977b-ab2f1dc1898e.png"
                   alt="Liril Chandrawanshi - Backend Developer"
-                  className="w-48 h-48 lg:w-64 lg:h-64 rounded-full object-cover border-4 border-primary/30 shadow-glow-primary group-hover:scale-105 transition-all duration-500 animate-float"
+                  className="w-48 h-48 lg:w-64 lg:h-64 rounded-full object-cover border-4 border-primary/30 shadow-glow-primary group-hover:scale-105 transition-all duration-500"
                 />
                 <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-primary/10 to-accent/10 group-hover:from-primary/20 group-hover:to-accent/20 transition-all duration-500"></div>
               </div>
