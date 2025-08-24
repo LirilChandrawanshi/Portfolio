@@ -3,10 +3,31 @@ import { useState, useEffect } from 'react';
 const CursorTracker = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
+  const [trail, setTrail] = useState<Array<{ x: number; y: number; id: number }>>([]);
+  const [binaryBits, setBinaryBits] = useState<Array<{ x: number; y: number; bit: string; id: number; opacity: number }>>([]);
 
   useEffect(() => {
     const updateMousePosition = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
+      const newPos = { x: e.clientX, y: e.clientY };
+      setMousePosition(newPos);
+      
+      // Update trail
+      setTrail(prev => {
+        const newTrail = [{ ...newPos, id: Date.now() }, ...prev.slice(0, 8)];
+        return newTrail;
+      });
+      
+      // Add binary particles randomly
+      if (Math.random() > 0.7) {
+        const newBit = {
+          x: newPos.x + (Math.random() - 0.5) * 100,
+          y: newPos.y + (Math.random() - 0.5) * 100,
+          bit: Math.random() > 0.5 ? '1' : '0',
+          id: Date.now() + Math.random(),
+          opacity: 1
+        };
+        setBinaryBits(prev => [...prev.slice(-15), newBit]);
+      }
     };
 
     const handleMouseEnter = () => setIsHovering(true);
@@ -31,33 +52,76 @@ const CursorTracker = () => {
     };
   }, []);
 
+  // Animate binary bits
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setBinaryBits(prev => 
+        prev.map(bit => ({ 
+          ...bit, 
+          opacity: bit.opacity - 0.05,
+          y: bit.y - 1 
+        })).filter(bit => bit.opacity > 0)
+      );
+    }, 50);
+    
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <>
-      {/* Custom cursor */}
+      {/* Tech-themed main cursor */}
       <div
-        className="fixed pointer-events-none z-50 mix-blend-difference"
+        className="fixed pointer-events-none z-50"
         style={{
-          left: mousePosition.x - 10,
-          top: mousePosition.y - 10,
-          transform: `scale(${isHovering ? 1.5 : 1})`,
+          left: mousePosition.x - 12,
+          top: mousePosition.y - 12,
+          transform: `scale(${isHovering ? 1.3 : 1})`,
         }}
       >
-        <div className={`w-5 h-5 bg-white rounded-full transition-all duration-200 ${isHovering ? 'opacity-80' : 'opacity-60'}`} />
+        {/* Main cursor - circuit node */}
+        <div className="relative">
+          <div className={`w-6 h-6 bg-primary rounded-full transition-all duration-200 ${isHovering ? 'shadow-glow-primary' : ''}`}>
+            <div className="absolute inset-1 bg-background rounded-full" />
+            <div className="absolute inset-2 bg-primary rounded-full animate-pulse" />
+          </div>
+          
+          {/* Circuit lines */}
+          <div className={`absolute top-1/2 left-1/2 w-8 h-0.5 bg-primary/60 -translate-x-1/2 -translate-y-1/2 transition-all duration-200 ${isHovering ? 'w-12 bg-primary' : ''}`} />
+          <div className={`absolute top-1/2 left-1/2 w-0.5 h-8 bg-primary/60 -translate-x-1/2 -translate-y-1/2 transition-all duration-200 ${isHovering ? 'h-12 bg-primary' : ''}`} />
+        </div>
       </div>
 
-      {/* Cursor trail effect */}
-      <div
-        className="fixed pointer-events-none z-49"
-        style={{
-          left: mousePosition.x - 20,
-          top: mousePosition.y - 20,
-          transform: `scale(${isHovering ? 2 : 1.2})`,
-        }}
-      >
-        <div className={`w-10 h-10 border-2 border-primary/30 rounded-full transition-all duration-300 ${isHovering ? 'border-primary/60' : ''}`} />
-      </div>
+      {/* Circuit trail */}
+      {trail.map((point, index) => (
+        <div
+          key={point.id}
+          className="fixed pointer-events-none z-49"
+          style={{
+            left: point.x - 3,
+            top: point.y - 3,
+            opacity: (trail.length - index) / trail.length * 0.5,
+          }}
+        >
+          <div className="w-1.5 h-1.5 bg-accent rounded-full" />
+        </div>
+      ))}
 
-      {/* Interactive background elements that follow cursor */}
+      {/* Binary particles */}
+      {binaryBits.map((bit) => (
+        <div
+          key={bit.id}
+          className="fixed pointer-events-none z-48 font-mono text-xs text-primary/70 select-none"
+          style={{
+            left: bit.x,
+            top: bit.y,
+            opacity: bit.opacity,
+          }}
+        >
+          {bit.bit}
+        </div>
+      ))}
+
+      {/* Tech grid background effect */}
       <div 
         className="fixed pointer-events-none z-0 opacity-5"
         style={{
@@ -68,6 +132,7 @@ const CursorTracker = () => {
         <div className="w-96 h-96 bg-primary rounded-full blur-3xl" />
       </div>
       
+      {/* Secondary glow */}
       <div 
         className="fixed pointer-events-none z-0 opacity-3"
         style={{
@@ -77,6 +142,20 @@ const CursorTracker = () => {
       >
         <div className="w-72 h-72 bg-accent rounded-full blur-3xl" />
       </div>
+
+      {/* Hover effect - tech ring */}
+      {isHovering && (
+        <div
+          className="fixed pointer-events-none z-49"
+          style={{
+            left: mousePosition.x - 25,
+            top: mousePosition.y - 25,
+          }}
+        >
+          <div className="w-12 h-12 border border-primary/40 rounded-full animate-ping" />
+          <div className="absolute inset-2 border border-accent/40 rounded-full animate-ping" style={{ animationDelay: '0.1s' }} />
+        </div>
+      )}
     </>
   );
 };
