@@ -41,7 +41,7 @@ const Navigation = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="text-xl font-bold bg-text-gradient bg-clip-text text-transparent">
-            Liril.dev
+            Liril Chandrawanshi
           </div>
 
           {/* Desktop Navigation */}

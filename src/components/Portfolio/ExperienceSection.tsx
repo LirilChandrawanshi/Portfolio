@@ -5,14 +5,14 @@ import { Building, GraduationCap, Award, Calendar } from 'lucide-react';
 const ExperienceSection = () => {
   const education = [
     {
-      school: "Birla Institute of Technology, Mesra – Noida Campus",
-      degree: "MCA",
+      school: "Birla Institute of Technology, Mesra",
+      degree: "Master Of Computer Applications",
       date: "2023 – 2025",
       type: "Masters"
     },
     {
       school: "Govt. Motilal Vigyan Mahavidyalaya, Bhopal",
-      degree: "BSc Computer Science",
+      degree: "Bachelor of  Computer Science",
       date: "2019 – 2022",
       type: "Bachelors"
     }
@@ -28,7 +28,7 @@ const ExperienceSection = () => {
   const experience = [
     {
       company: "Univest",
-      role: "Tech Intern",
+      role: "Software Developer",
       period: "Current",
       description: "Working on backend development with focus on scalable solutions and system architecture.",
       type: "current"

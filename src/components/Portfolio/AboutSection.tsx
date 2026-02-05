@@ -97,7 +97,7 @@ const AboutSection = () => {
               <div className="space-y-6 flex-1">
                 <div className="prose prose-lg text-muted-foreground max-w-none">
                   <p className="text-lg leading-relaxed">
-                    I'm Liril, a tech enthusiast currently working as a <span className="text-primary font-semibold">Tech Intern at Univest</span>. 
+                    I'm Liril, a tech enthusiast currently working as a <span className="text-primary font-semibold">Software Developer  at Univest</span>. 
                     With a foundation in Java and Spring Boot, and a growing command over React.js and Next.js, 
                     I enjoy building things end-to-end.
                   </p>

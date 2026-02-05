@@ -69,7 +69,7 @@ const HeroSection = () => {
               {/* Animated role */}
               <div className="h-16 mb-8">
                 <h2 className="text-xl md:text-2xl lg:text-3xl font-medium text-muted-foreground">
-                  <span className="text-primary">Tech Intern @Univest</span> | 
+                  <span className="text-primary">Software Developer @Univest</span> | 
                   <span className="ml-2 inline-block min-w-[200px] text-accent transition-all duration-500">
                     {roles[currentRole]}
                   </span>
