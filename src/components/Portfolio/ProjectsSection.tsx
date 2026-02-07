@@ -36,7 +36,7 @@ const ProjectsSection = () => {
       techStack: ["React", "TypeScript", "Spring Boot", "MongoDB", "OpenAI API", "Tailwind CSS", "LaTeX", "JWT"],
       role: "Full Stack App",
       link: "https://smart-resume-genie-app-main-seven.vercel.app/",
-      github: "https://github.com/LirilChandrawanshi/SmartResumeGenie",
+      github: "https://github.com/LirilChandrawanshi/smart-resume-genie-app-main",
       icon: FileText,
       color: "accent"
     },
@@ -46,17 +46,17 @@ const ProjectsSection = () => {
   return (
     <section className="py-20 relative">
       <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-text-gradient bg-clip-text text-transparent">
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 bg-text-gradient bg-clip-text text-transparent">
             Featured Projects
           </h2>
-          <div className="w-24 h-1 bg-primary mx-auto mb-8 rounded-full"></div>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <div className="w-24 h-1 bg-primary mx-auto mb-6 sm:mb-8 rounded-full"></div>
+          <p className="text-base sm:text-xl text-muted-foreground max-w-3xl mx-auto px-2">
             Showcasing my journey through backend development, full-stack solutions, and real-world applications
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
           {projects.map((project, index) => (
             <a
               key={project.name}
@@ -119,7 +119,7 @@ const ProjectsSection = () => {
                   </div>
 
                   {/* Action Buttons */}
-                  <div className="flex gap-3 pt-2">
+                  <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 pt-2">
                     {project.link && (
                       <Button
                         size="sm"

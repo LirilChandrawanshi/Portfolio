@@ -38,22 +38,22 @@ const ContactSection = () => {
         `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
       );
       const mailtoLink = `mailto:myselfliril@gmail.com?subject=${subject}&body=${body}`;
-      
+
       // Open email client
       window.location.href = mailtoLink;
-      
+
       setIsSubmitted(true);
       toast({
         title: "Email client opened!",
         description: "Your default email client should open with the message pre-filled.",
       });
-      
+
       // Reset form after a delay
       setTimeout(() => {
         setFormData({ name: '', email: '', subject: '', message: '' });
         setIsSubmitted(false);
       }, 3000);
-      
+
     } catch (error) {
       toast({
         title: "Error",
@@ -112,19 +112,19 @@ const ContactSection = () => {
   ];
 
   return (
-    <section className="py-20 relative">
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-text-gradient bg-clip-text text-transparent">
+    <section className="py-16 sm:py-20 relative">
+      <div className="container mx-auto px-4 sm:px-6">
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 bg-text-gradient bg-clip-text text-transparent">
             Let's Connect
           </h2>
-          <div className="w-24 h-1 bg-primary mx-auto mb-8 rounded-full"></div>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <div className="w-24 h-1 bg-primary mx-auto mb-6 sm:mb-8 rounded-full"></div>
+          <p className="text-base sm:text-xl text-muted-foreground max-w-3xl mx-auto px-2">
             Ready to collaborate on your next project? I'd love to hear from you and discuss how we can build something amazing together.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="grid lg:grid-cols-3 gap-6 sm:gap-8">
           {/* Contact Form */}
           <div className="lg:col-span-2">
             <Card className="bg-card-gradient border-border hover:shadow-glow-primary/20 transition-all duration-500">
@@ -142,7 +142,7 @@ const ContactSection = () => {
                   <div className="grid md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="name">Name *</Label>
-                      <Input 
+                      <Input
                         id="name"
                         name="name"
                         value={formData.name}
@@ -154,7 +154,7 @@ const ContactSection = () => {
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="email">Email *</Label>
-                      <Input 
+                      <Input
                         id="email"
                         name="email"
                         type="email"
@@ -166,10 +166,10 @@ const ContactSection = () => {
                       />
                     </div>
                   </div>
-                  
+
                   <div className="space-y-2">
                     <Label htmlFor="subject">Subject</Label>
-                    <Input 
+                    <Input
                       id="subject"
                       name="subject"
                       value={formData.subject}
@@ -178,10 +178,10 @@ const ContactSection = () => {
                       className="bg-background border-border focus:border-primary transition-colors"
                     />
                   </div>
-                  
+
                   <div className="space-y-2">
                     <Label htmlFor="message">Message *</Label>
-                    <Textarea 
+                    <Textarea
                       id="message"
                       name="message"
                       value={formData.message}
@@ -191,10 +191,10 @@ const ContactSection = () => {
                       required
                     />
                   </div>
-                  
-                  <Button 
+
+                  <Button
                     type="submit"
-                    size="lg" 
+                    size="lg"
                     disabled={isSubmitting || isSubmitted}
                     className="w-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-glow-primary hover:shadow-glow-primary/50 transition-all duration-300 disabled:opacity-50"
                   >
@@ -235,7 +235,7 @@ const ContactSection = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center space-x-4 p-3 rounded-lg hover:bg-muted/50 transition-all duration-300 group"
-                    style={{ 
+                    style={{
                       animationDelay: `${index * 0.1}s`,
                       animation: 'slide-up 0.6s ease-out forwards'
                     }}
@@ -266,7 +266,7 @@ const ContactSection = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-between p-3 rounded-lg hover:bg-muted/50 transition-all duration-300 group"
-                    style={{ 
+                    style={{
                       animationDelay: `${(index + 4) * 0.1}s`,
                       animation: 'slide-up 0.6s ease-out forwards'
                     }}
@@ -293,8 +293,8 @@ const ContactSection = () => {
                   </p>
                 </div>
                 <div className="space-y-3">
-                  <Button 
-                    variant="outline" 
+                  <Button
+                    variant="outline"
                     className="w-full border-accent text-accent hover:bg-accent hover:text-accent-foreground transition-all duration-300"
                     asChild
                   >
@@ -303,8 +303,8 @@ const ContactSection = () => {
                       WhatsApp Me
                     </a>
                   </Button>
-                  <Button 
-                    variant="outline" 
+                  <Button
+                    variant="outline"
                     className="w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300"
                     asChild
                   >

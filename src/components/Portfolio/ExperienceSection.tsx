@@ -62,19 +62,19 @@ const ExperienceSection = () => {
   return (
     <section className="py-20 relative">
       <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-text-gradient bg-clip-text text-transparent">
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 bg-text-gradient bg-clip-text text-transparent">
             Experience & Education
           </h2>
-          <div className="w-24 h-1 bg-primary mx-auto mb-8 rounded-full"></div>
+          <div className="w-24 h-1 bg-primary mx-auto mb-6 sm:mb-8 rounded-full"></div>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="grid lg:grid-cols-3 gap-6 sm:gap-8">
           {/* Experience */}
-          <div className="lg:col-span-2 space-y-6">
-            <div className="flex items-center space-x-3 mb-6">
-              <Building className="h-6 w-6 text-primary" />
-              <h3 className="text-2xl font-bold text-card-foreground">Professional Experience</h3>
+          <div className="lg:col-span-2 space-y-4 sm:space-y-6">
+            <div className="flex items-center space-x-3 mb-4 sm:mb-6">
+              <Building className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
+              <h3 className="text-xl sm:text-2xl font-bold text-card-foreground">Professional Experience</h3>
             </div>
 
             {experience.map((exp, index) => (
@@ -86,19 +86,19 @@ const ExperienceSection = () => {
                   animation: 'slide-up 0.6s ease-out forwards'
                 }}
               >
-                <CardHeader>
-                  <div className="flex items-start justify-between">
+                <CardHeader className="pb-2 sm:pb-4">
+                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
                     <div>
-                      <CardTitle className="text-card-foreground group-hover:text-primary transition-colors">
+                      <CardTitle className="text-base sm:text-lg text-card-foreground group-hover:text-primary transition-colors">
                         {exp.role}
                       </CardTitle>
-                      <CardDescription className="text-lg font-medium text-accent">
+                      <CardDescription className="text-sm sm:text-lg font-medium text-accent">
                         {exp.company}
                       </CardDescription>
                     </div>
                     <Badge
                       variant={exp.type === 'current' ? 'default' : 'secondary'}
-                      className={exp.type === 'current' ? 'bg-primary text-primary-foreground' : ''}
+                      className={`w-fit text-xs sm:text-sm ${exp.type === 'current' ? 'bg-primary text-primary-foreground' : ''}`}
                     >
                       {exp.period}
                     </Badge>

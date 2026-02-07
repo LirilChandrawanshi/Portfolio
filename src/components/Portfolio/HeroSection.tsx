@@ -62,22 +62,24 @@ const HeroSection = () => {
               </div>
 
               {/* Name with gradient text */}
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 bg-text-gradient bg-clip-text text-transparent animate-gradient-shift bg-[length:200%_200%]">
+              <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-6 bg-text-gradient bg-clip-text text-transparent animate-gradient-shift bg-[length:200%_200%]">
                 Liril Chandrawanshi
               </h1>
 
               {/* Animated role */}
-              <div className="h-16 ">
-                <h2 className="text-xl md:text-2xl lg:text-3xl font-medium text-muted-foreground whitespace-nowrap">
-                  <span className="text-primary">Software Developer @Univest</span> |
-                  <span className="ml-2 inline-block min-w-[200px] text-accent transition-all duration-500">
+              <div className="min-h-[4rem] sm:min-h-[3.5rem] mb-4 sm:mb-6">
+                <h2 className="text-base sm:text-xl md:text-2xl lg:text-3xl font-medium text-muted-foreground">
+                  <span className="text-primary">Software Developer @Univest</span>
+                  <span className="hidden sm:inline"> | </span>
+                  <br className="sm:hidden" />
+                  <span className="sm:ml-2 inline-block text-accent transition-all duration-500">
                     {roles[currentRole]}
                   </span>
                 </h2>
               </div>
 
               {/* Description */}
-              <p className="text-lg lg:text-xl text-muted-foreground leading-relaxed mb-8">
+              <p className="text-base sm:text-lg lg:text-xl text-muted-foreground leading-relaxed mb-6 sm:mb-8">
                 Passionate about building scalable backend systems and beautiful user interfaces.
                 Currently exploring cloud integrations and advanced architecture patterns while crafting
                 impactful solutions from concept to deployment.

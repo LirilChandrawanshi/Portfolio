@@ -80,24 +80,24 @@ const AboutSection = () => {
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-text-gradient bg-clip-text text-transparent">
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 bg-text-gradient bg-clip-text text-transparent">
             About Me
           </h2>
-          <div className="w-24 h-1 bg-primary mx-auto mb-8 rounded-full animate-pulse"></div>
+          <div className="w-24 h-1 bg-primary mx-auto mb-6 sm:mb-8 rounded-full animate-pulse"></div>
         </div>
 
-        <div className="grid lg:grid-cols-12 gap-12 items-start">
+        <div className="grid lg:grid-cols-12 gap-8 sm:gap-12 items-start">
           {/* About Text and Image */}
-          <div className="lg:col-span-8 space-y-8">
+          <div className="lg:col-span-8 space-y-6 sm:space-y-8">
             {/* Profile Section */}
-            <div className="flex flex-col md:flex-row gap-8 items-center">
+            <div className="flex flex-col md:flex-row gap-6 sm:gap-8 items-center">
               <div className="relative group flex-shrink-0">
                 <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500 animate-pulse"></div>
                 <img
                   src="/assets/images/profile.png"
                   alt="Liril Chandrawanshi - Professional Photo"
-                  className="relative w-48 h-48 md:w-56 md:h-56 rounded-2xl object-cover border-2 border-primary/20 shadow-glow-primary/30 group-hover:scale-105 transition-all duration-500"
+                  className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 rounded-2xl object-cover border-2 border-primary/20 shadow-glow-primary/30 group-hover:scale-105 transition-all duration-500"
                 />
               </div>
 

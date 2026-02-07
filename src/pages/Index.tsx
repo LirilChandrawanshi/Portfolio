@@ -9,33 +9,33 @@ import CursorTracker from '@/components/Portfolio/CursorTracker';
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden relative cursor-none">
+    <div className="min-h-screen bg-background text-foreground overflow-x-hidden relative md:cursor-none">
       <CursorTracker />
       <FloatingParticles />
       <Navigation />
-      
+
       <main>
         <section id="home">
           <HeroSection />
         </section>
-        
+
         <section id="about">
           <AboutSection />
         </section>
-        
+
         <section id="projects">
           <ProjectsSection />
         </section>
-        
+
         <section id="experience">
           <ExperienceSection />
         </section>
-        
+
         <section id="contact">
           <ContactSection />
         </section>
       </main>
-      
+
       {/* Footer */}
       <footer className="py-8 border-t border-border">
         <div className="container mx-auto px-6 text-center">

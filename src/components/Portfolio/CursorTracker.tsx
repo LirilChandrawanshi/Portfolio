@@ -5,18 +5,37 @@ const CursorTracker = () => {
   const [isHovering, setIsHovering] = useState(false);
   const [trail, setTrail] = useState<Array<{ x: number; y: number; id: number }>>([]);
   const [binaryBits, setBinaryBits] = useState<Array<{ x: number; y: number; bit: string; id: number; opacity: number }>>([]);
+  const [isMobile, setIsMobile] = useState(true); // Default to true to prevent flash
 
+  // Detect mobile/touch devices
   useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(
+        window.matchMedia('(pointer: coarse)').matches ||
+        window.innerWidth < 768 ||
+        'ontouchstart' in window
+      );
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Mouse tracking - only runs on desktop
+  useEffect(() => {
+    if (isMobile) return; // Skip mouse tracking on mobile
+
     const updateMousePosition = (e: MouseEvent) => {
       const newPos = { x: e.clientX, y: e.clientY };
       setMousePosition(newPos);
-      
+
       // Update trail
       setTrail(prev => {
         const newTrail = [{ ...newPos, id: Date.now() }, ...prev.slice(0, 8)];
         return newTrail;
       });
-      
+
       // Add binary particles randomly
       if (Math.random() > 0.7) {
         const newBit = {
@@ -35,7 +54,7 @@ const CursorTracker = () => {
 
     // Track mouse movement
     window.addEventListener('mousemove', updateMousePosition);
-    
+
     // Track hover states on interactive elements
     const interactiveElements = document.querySelectorAll('button, a, .interactive');
     interactiveElements.forEach(element => {
@@ -50,22 +69,27 @@ const CursorTracker = () => {
         element.removeEventListener('mouseleave', handleMouseLeave);
       });
     };
-  }, []);
+  }, [isMobile]);
 
-  // Animate binary bits
+  // Animate binary bits - only runs on desktop
   useEffect(() => {
+    if (isMobile) return;
+
     const interval = setInterval(() => {
-      setBinaryBits(prev => 
-        prev.map(bit => ({ 
-          ...bit, 
+      setBinaryBits(prev =>
+        prev.map(bit => ({
+          ...bit,
           opacity: bit.opacity - 0.05,
-          y: bit.y - 1 
+          y: bit.y - 1
         })).filter(bit => bit.opacity > 0)
       );
     }, 50);
-    
+
     return () => clearInterval(interval);
-  }, []);
+  }, [isMobile]);
+
+  // Don't render on mobile devices
+  if (isMobile) return null;
 
   return (
     <>
@@ -84,7 +108,7 @@ const CursorTracker = () => {
             <div className="absolute inset-1 bg-background rounded-full" />
             <div className="absolute inset-2 bg-primary rounded-full animate-pulse" />
           </div>
-          
+
           {/* Circuit lines */}
           <div className={`absolute top-1/2 left-1/2 w-8 h-0.5 bg-primary/60 -translate-x-1/2 -translate-y-1/2 transition-all duration-200 ${isHovering ? 'w-12 bg-primary' : ''}`} />
           <div className={`absolute top-1/2 left-1/2 w-0.5 h-8 bg-primary/60 -translate-x-1/2 -translate-y-1/2 transition-all duration-200 ${isHovering ? 'h-12 bg-primary' : ''}`} />
@@ -122,7 +146,7 @@ const CursorTracker = () => {
       ))}
 
       {/* Tech grid background effect */}
-      <div 
+      <div
         className="fixed pointer-events-none z-0 opacity-5"
         style={{
           left: mousePosition.x * 0.1,
@@ -131,9 +155,9 @@ const CursorTracker = () => {
       >
         <div className="w-96 h-96 bg-primary rounded-full blur-3xl" />
       </div>
-      
+
       {/* Secondary glow */}
-      <div 
+      <div
         className="fixed pointer-events-none z-0 opacity-3"
         style={{
           left: mousePosition.x * -0.05,
