@@ -42,7 +42,7 @@ const HeroSection = () => {
         <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
 
           {/* Profile Image Section */}
-          <div className="flex flex-col lg:flex-row items-center lg:items-center justify-center gap-12 mb-12">
+          <div className="flex flex-col lg:flex-row items-center lg:items-center justify-center gap-8 sm:gap-12 mb-12 mt-8 sm:mt-0">
             <div className="relative group">
               <div className="absolute inset-0 bg-primary/20 rounded-full blur-2xl group-hover:blur-3xl transition-all duration-500 animate-pulse"></div>
               <div className="relative">
