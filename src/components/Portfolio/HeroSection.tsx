@@ -102,7 +102,7 @@ const HeroSection = () => {
                   asChild
                 >
                   <a
-                    href="https://drive.google.com/file/d/13nYFQ5PVuZchJMYaHN3M7ocS5ooWDVUf/view?usp=sharing"
+                    href="https://drive.google.com/file/d/10DEtS89WfaSu_T9oFYWhZRRV6fCdEA5Z/view?usp=sharing"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
